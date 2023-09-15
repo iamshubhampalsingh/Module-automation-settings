@@ -1,0 +1,15 @@
+n on the receiver and sender devices' screens
+receiver_turn_on_command = ['adb', '-s', receiver_device_serial, 'shell', 'input', 'keyevent', '224']
+sender_turn_on_command = ['adb', '-s', 'cf611ff9', 'shell', 'input', 'keyevent', '224']
+
+# ADB commands to turn off the receiver and sender devices' screens
+receiver_turn_off_command = ['adb', '-s', receiver_device_serial, 'shell', 'input', 'keyevent', '26']
+sender_turn_off_command = ['adb', '-s', 'cf611ff9', 'shell', 'input', 'keyevent', '26']
+
+receiver_device(resourceId="com.android.systemui:id/center_group").click()
+time.sleep(2)
+
+if receiver_device.xpath('//*[@resource-id="com.android.systemui:id/mobile_group"]/android.widget.FrameLayout[1]').exists():
+    print("The mobile network is on")
+else:
+    print("The mobile network is not on")
