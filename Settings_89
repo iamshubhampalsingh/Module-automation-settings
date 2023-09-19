@@ -20,13 +20,6 @@ sender_turn_on_command = ['adb', '-s', 'cf611ff9', 'shell', 'input', 'keyevent',
 receiver_turn_off_command = ['adb', '-s', receiver_device_serial, 'shell', 'input', 'keyevent', '26']
 sender_turn_off_command = ['adb', '-s', 'cf611ff9', 'shell', 'input', 'keyevent', '26']
 
-# Define the package name and activity name of the Camera app
-package_name = "com.android.camera"
-activity_name = "com.android.camera.Camera"
-
-# ADB command to start the Camera app
-adb_command = ["adb", "-s", receiver_device_serial, "shell", "am", "start", "-n", f"{package_name}/{activity_name}"]
-
 receiver_device(resourceId="com.android.launcher3:id/folder_icon_name").click()
 time.sleep(2)
 receiver_device(text="Gmail").click()
