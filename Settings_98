@@ -1,0 +1,48 @@
+import uiautomator2 as ui2
+import numpy as np
+from PIL import Image
+
+# Device serial number of the receiver device
+receiver_device_serial = "192.168.2.39:5555"
+
+# Create a Device object for the receiver device
+receiver_device = ui2.Device(receiver_device_serial)
+
+def capture_screenshot(device, filename):
+    device.screenshot(filename)
+
+def check_black_white_screen(image_path):
+    # Load the screenshot image
+    image = Image.open(image_path)
+
+    # Convert the image to a NumPy array
+    np_image = np.array(image)
+
+    # Calculate the mean color values for each channel (R, G, B)
+    mean_values = np_image.mean(axis=(0, 1))
+
+    # Threshold for determining black or white screen
+    threshold = 50
+
+    # Check if the mean values are below the threshold (indicating a predominantly black screen)
+    is_black_screen = all(value < threshold for value in mean_values)
+
+    # Check if the mean values are above (255 - threshold) (indicating a predominantly white screen)
+    is_white_screen = all(value > 255 - threshold for value in mean_values)
+
+    return is_black_screen, is_white_screen
+
+# Capture a screenshot
+screenshot_filename = "screenshot.png"
+capture_screenshot(receiver_device, screenshot_filename)
+
+# Check if the screen is black or white
+is_black, is_white = check_black_white_screen(screenshot_filename)
+
+# Print the result
+if is_black:
+    print("The screen is predominantly black.")
+elif is_white:
+    print("The screen is predominantly white.")
+else:
+    print("The screen is neither predominantly black nor white.")
