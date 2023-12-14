@@ -1,0 +1,24 @@
+import uiautomator2 as ui2
+import time
+
+# Device serial number of the receiver device
+receiver_device_serial = "192.168.2.39:5555"
+
+# Create a Device object for the receiver device
+receiver_device = ui2.Device(receiver_device_serial)
+
+def change_volume(device, volume_up=True):
+    # Keycode for volume up and volume down
+    key_event = 24 if volume_up else 25  # 24 is Volume Up, 25 is Volume Down
+
+    # Send the key event to change the volume
+    device.shell(f'input keyevent {key_event}')
+
+# Increase the volume
+change_volume(receiver_device, volume_up=True)
+
+# Wait for a moment (optional)
+time.sleep(2)
+
+# Decrease the volume
+change_volume(receiver_device, volume_up=False)
