@@ -1,0 +1,26 @@
+import uiautomator2 as ui2
+import time
+
+# Device serial number
+device_serial = "192.168.2.39:5555"
+
+# Create a Device object for the device
+device = ui2.Device(device_serial)
+
+def toggle_airplane_mode(device):
+    # Open settings
+    device.app_start("com.android.settings")
+
+    # Wait for the settings app to open (adjust the delay as needed)
+    time.sleep(2)
+
+    # Swipe up to scroll to the top of the settings
+    device.swipe(500, 1500, 500, 300, steps=10)
+
+    # Close the settings app
+    device.press("home")
+
+# Toggle airplane mode
+toggle_airplane_mode(device)
+
+print("Aeroplane mode is checked in settings")
