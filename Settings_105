@@ -1,0 +1,24 @@
+import uiautomator2 as ui2
+import time
+
+# Device serial number
+device_serial = "192.168.2.39:5555"
+
+# Create a Device object for the device
+receiver_device = ui2.Device(device_serial)
+
+# Coordinates for the swipe action
+start_x = 500  # Adjust these values based on your device's screen size and orientation
+start_y = 200
+end_x = 500
+end_y = 800
+
+# Swipe down to open the notification panel
+receiver_device.swipe(start_x, start_y, end_x, end_y)
+
+# Wait for a moment (optional)
+time.sleep(2)
+
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/center_group").click()
