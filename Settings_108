@@ -1,0 +1,26 @@
+import uiautomator2 as ui2
+import time
+
+# Device serial number
+receiver_device_serial = "192.168.2.39:5555"
+
+# Create a Device object for the device
+reciever_device = ui2.Device(reciever_device_serial)
+
+def toggle_airplane_mode(device):
+    # Open settings
+    reciever_device.app_start("com.android.settings")
+
+    # Wait for the settings app to open (adjust the delay as needed)
+    time.sleep(2)
+    reciever_device(resourceId="android:id/title", text="Network & internet").click()
+    time.sleep(2)
+    if reciever_device(resourceId="android:id/summary", text="Lava-5G-test").exists():
+        print("Network connected is Lava 5G ")
+    else:
+        print("Network connecyed is not Lava 5G")
+    reciever_device(resourceId="com.android.systemui:id/back").click()
+    time.sleep(2)
+    reciever_device(resourceId="com.android.systemui:id/back").click()
+    time.sleep(2)
+    print("Test case Settings_107 pass")
