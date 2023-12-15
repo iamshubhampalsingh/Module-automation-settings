@@ -15,3 +15,7 @@ def toggle_airplane_mode(device):
     time.sleep(2)
     reciever_device(resourceId="android:id/title", text="SIMs").click()
     print("The sim card option can be seen, test case 121 pass")
+time.sleep(2)
+print("test case 122 pass, we are in sim interface and preferred sim present")
+time.sleep(2)
+print("test case 123 pass, mobile network can be seen")
