@@ -1,0 +1,42 @@
+import uiautomator2 as ui2
+import time
+
+# Device serial number
+receiver_device_serial = "192.168.2.39:5555"
+
+# Create a Device object for the device
+reciever_device = ui2.Device(reciever_device_serial)
+
+def toggle_airplane_mode(device):
+    # Open settings
+    reciever_device.app_start("com.android.settings")
+    time.sleep(2)
+    reciever_device(resourceId="android:id/title", text="Network & internet").click()
+    time.sleep(2)
+    reciever_device(resourceId="android:id/title", text="Hotspot & tethering").click()
+    time.sleep(2)
+    reciever_device(resourceId="android:id/title", text="Wi‑Fi hotspot").click()
+    
+    # Perform a swipe to the end of the page
+    # Replace the coordinates with the actual starting and ending points you need
+    start_x = 500  # Starting x-coordinate
+    start_y = 1000  # Starting y-coordinate
+    end_x = 500  # Ending x-coordinate
+    end_y = 100  # Ending y-coordinate
+
+    # Swipe action
+    device.swipe(start_x, start_y, end_x, end_y)
+
+    reciever_device(resourceId="android:id/title", text="White List Mode").click()
+    time.sleep(2)
+    print("White list can be seen, Settings_133 pass")
+    time.sleep(2)
+    reciever_device(resourceId="com.android.systemui:id/back").click()
+    time.sleep(2)
+    reciever_device(resourceId="com.android.systemui:id/back").click()
+    time.sleep(2)
+    reciever_device(resourceId="com.android.systemui:id/back").click()
+    time.sleep(2)
+    reciever_device(resourceId="com.android.systemui:id/back").click()
+    time.sleep(2)
+    print("In Hotspot, we can open wifi whgmail can be seen, Settings_133 pass")
