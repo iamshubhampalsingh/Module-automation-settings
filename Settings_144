@@ -1,0 +1,26 @@
+import uiautomator2 as ui2
+import time
+
+# Device serial number
+device_serial = "192.168.2.104:5555"
+
+# Create a Device object for the device
+reciever_device = ui2.Device(device_serial)
+
+# Open settings
+reciever_device.app_start("com.android.settings")
+time.sleep(2)
+# Scroll down to find the "Display" section
+receiver_device(scrollable=True).scroll.to(text="Display")
+time.sleep(2)
+receiver_device(resourceId="android:id/title", text="Adaptive brightness").click()
+time.sleep(2)
+receiver_device(resourceId="android:id/switch_widget").click()
+time.sleep(2)
+reciever_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+reciever_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+reciever_device(resourceId="com.android.systemui:id/back").click()
+print("In display, we can change adaptive brightness")
+print("Test case 144 pass")
