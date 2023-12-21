@@ -1,0 +1,23 @@
+import uiautomator2 as ui2
+import time
+
+# Device serial number
+device_serial = "192.168.2.104:5555"
+
+# Create a Device object for the device
+reciever_device = ui2.Device(device_serial)
+
+# Open settings
+reciever_device.app_start("com.android.settings")
+time.sleep(2)
+reciever_device(resourceId="android:id/title", text="Network & internet").click()
+time.sleep(2)
+reciever_device(resourceId="android:id/title", text="Private DNS").click()
+time.sleep(2)
+print("Private DNS is saved to automatic")
+time.sleep(2)
+reciever_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+reciever_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+reciever_device(resourceId="com.android.systemui:id/back").click()
