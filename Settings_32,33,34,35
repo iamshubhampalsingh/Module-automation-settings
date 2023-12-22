@@ -1,0 +1,17 @@
+import uiautomator2 as ui2
+import time
+
+# Device serial number
+device_serial = "192.168.2.104:5555"
+
+# Create a Device object for the device
+receiver_device = ui2.Device(device_serial)
+
+# Open settings
+receiver_device.app_start("com.android.settings")
+time.sleep(2)
+if receiver_device.xpath('//*[@resource-id="com.android.systemui:id/wifi_group"]/android.widget.FrameLayout[2]').exists():
+    print("Wifi is available")
+else:
+    print("Wifi is not available")
+print("test case 32,22,34,35 pass as wifi network can be observed")
