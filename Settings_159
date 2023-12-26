@@ -1,0 +1,27 @@
+import subprocess
+import time
+
+# Record start time
+start_time = time.time()
+
+# Device serial number
+device_serial = "192.168.2.104:5555"
+
+# Create a Device object for the device
+receiver_device = ui2.Device(device_serial)
+
+# Run adb shell command to download a file
+subprocess.run(['adb', 'shell', 'curl -o /dev/null http://example.com/bigfile'], shell=True)
+
+# Record end time
+end_time = time.time()
+
+# Calculate download speed
+download_time = end_time - start_time
+download_speed = 8 / download_time  # Assuming the file is 8 bits (1 byte) per second
+
+# Print the result
+print(f"Download speed: {download_speed:.2f} bps")
+
+receiver_device(resourceId="com.android.systemui:id/center_group").click()
+time.sleep(2)
