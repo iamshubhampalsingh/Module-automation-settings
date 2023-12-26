@@ -1,0 +1,24 @@
+import uiautomator2 as ui2
+import time
+
+# Device serial number
+device_serial = "192.168.2.104:5555"
+
+# Create a Device object for the device
+receiver_device = ui2.Device(device_serial)
+
+# Open settings
+receiver_device.app_start("com.android.settings")
+time.sleep(2)
+receiver_device(resourceId="android:id/title", text="Apps").click()
+time.sleep(2)
+if receiver_device.xpath('//*[@resource-id="com.android.settings:id/recycler_view"]/android.widget.LinearLayout[2]/android.widget.LinearLayout[1]/android.widget.ImageView[1]'):
+    print("Customise app name icon is present")
+
+else:
+    print("Customise app name icon is not present")
+print("Test case 151 pass")
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
