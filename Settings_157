@@ -1,0 +1,26 @@
+import uiautomator2 as ui2
+import time
+
+# Device serial number
+device_serial = "192.168.2.104:5555"
+
+# Create a Device object for the device
+receiver_device = ui2.Device(device_serial)
+
+# For example, let's assume we want to long click on the center of the screen
+receiver_device.long_click(0.101, 0.452)
+time.sleep(1)
+print("Long click on the home screen performed")
+time.sleep(2)
+receiver_device.xpath('//*[@resource-id="com.android.launcher3:id/popup_container"]/android.widget.FrameLayout[3]').click()
+time.sleep(2)
+receiver_device(resourceId="android:id/title", text="Home screen").click()
+time.sleep(2)
+if receiver_device(resourceId="com.android.launcher3:id/launcher_mode_title", text="Botton Rock Column Title").exists():
+    print("In desktop mode,Bottom rock column title is available")
+else:
+    print("In desktop mode,Bottom rock column title is not available")
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
