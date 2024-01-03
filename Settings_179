@@ -1,0 +1,32 @@
+import uiautomator2 as ui2
+import time
+
+# Device serial number
+device_serial = "192.168.2.138:5555"
+
+# Create a Device object for the device
+receiver_device = ui2.Device(device_serial)
+
+# Open settings
+receiver_device.app_start("com.android.settings")
+time.sleep(2)
+# Scroll to the "Display" element
+receiver_device(scrollable=True).scroll.to(text="System")
+time.sleep(2)
+receiver_device(text="System").click()
+time.sleep(2)
+receiver_device(resourceId="android:id/title", text="Gestures").click()
+time.sleep(2)
+receiver_device(resourceId="android:id/title", text="System navigation").click()
+time.sleep(2)
+receiver_device(resourceId="android:id/title", text="Navigation bar").click()
+time.sleep(2)
+receiver_device(resourceId="android:id/switch_widget").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
