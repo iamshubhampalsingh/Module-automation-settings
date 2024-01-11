@@ -1,0 +1,30 @@
+import uiautomator2 as ui2
+import time
+
+# Device serial number
+device_serial = "192.168.2.185:5555"
+
+# Create a Device object for the device
+receiver_device = ui2.Device(device_serial)
+
+# Open settings
+receiver_device.app_start("com.android.settings")
+time.sleep(2)
+# Scroll to the "Display" element
+receiver_device(resourceId="android:id/title", text="Apps").click()
+time.sleep(2)
+if receiver_device(resourceId="android:id/title", text="Default apps").exists():
+    
+    print("Default apps open,Test case 216 pass")
+else:
+    print("Default apps not present")
+    print("Test case 216 not pass")
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
