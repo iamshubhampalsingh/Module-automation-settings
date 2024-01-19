@@ -1,0 +1,30 @@
+import uiautomator2 as ui2
+import time
+
+# Device serial number
+device_serial = "192.168.2.185:5555"
+
+# Create a Device object for the device
+receiver_device = ui2.Device(device_serial)
+
+# Open settings
+receiver_device.app_start("com.android.settings")
+time.sleep(2)
+# Scroll to the "Display" element
+receiver_device(resourceId="android:id/title", text="Notifications").click()
+time.sleep(2)
+receiver_device(resourceId="android:id/title", text="Bubbles").click()
+time.sleep(2)
+if receiver_device(resourceId="android:id/title", text="receive msg via another device").exists():
+    print("recieve msg via another device is available")
+else:
+    print("Recieve msg via another device is not available")
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
