@@ -1,0 +1,33 @@
+import uiautomator2 as ui2
+import time
+
+# Device serial number
+device_serial = "192.168.2.185:5555"
+
+# Create a Device object for the device
+receiver_device = ui2.Device(device_serial)
+
+# Open settings
+receiver_device.app_start("com.android.settings")
+time.sleep(2)
+
+receiver_device(scrollable=True).scroll.to(text="Privacy")
+time.sleep(2)
+
+receiver_device(resourceId="android:id/title", text="Privacy").click()
+time.sleep(2)
+receiver_device(scrollable=True).scroll.to(text="Usage & diagnostics")
+time.sleep(2)
+
+if receiver_device(text="Usage & diagnostics").exists():
+    print("Usage & diagnostics is present")
+else:
+    print("Usage & diagnostics is not present")
+# Perform additional actions or handle the toggle state as needed
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
