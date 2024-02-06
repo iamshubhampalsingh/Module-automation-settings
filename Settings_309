@@ -1,0 +1,35 @@
+import uiautomator2 as ui2
+import time
+
+# Device serial number
+device_serial = "192.168.2.185:5555"
+
+# Create a Device object for the device
+receiver_device = ui2.Device(device_serial)
+
+# Open settings
+receiver_device.app_start("com.android.settings")
+time.sleep(2)
+receiver_device(scrollable=True).scroll.to(text="Security")
+time.sleep(2)
+receiver_device(resourceId="android:id/title", text="Security").click()
+time.sleep(2)
+receiver_device(resourceId="android:id/title", text="Find My Device").click()
+time.sleep(2)
+receiver_device(scrollable=True).scroll.to(text="More security settings")
+time.sleep(2)
+receiver_device(resourceId="android:id/title", text="More security settings").click()
+time.sleep(2)
+if receiver_device(resourceId="android:id/title", text="Clear credentials").exists:
+    print("In Security,Clear credentials is present")
+else:
+    print("In security,credentials is not present")
+
+# Perform additional actions or handle the toggle state as needed
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
