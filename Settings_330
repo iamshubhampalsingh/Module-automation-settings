@@ -1,0 +1,26 @@
+import uiautomator2 as ui2
+from time import sleep
+
+device_serial_number="192.168.2.71:5555"
+
+# creating object for device
+driver=ui2.Device(device_serial_number)
+
+#clearing recent open app
+driver.xpath("//*[@resource-id='com.android.systemui:id/recent_apps']").click()
+sleep(1)
+if driver.xpath("//*[@resource-id='com.android.launcher3:id/clean_buttons']").exists:
+   driver.xpath("//*[@resource-id='com.android.launcher3:id/clean_buttons']").click()
+sleep(2)
+else:
+   driver.xpath("//*[@resource-id='com.android.systemui:id/center_group']").click()
+#opening the setting
+driver.xpath('//*[@text="Settings"]').click()
+sleep(1)
+# entering text into search bar
+driver.xpath('//*[@resource-id="com.android.settings:id/homepage_app_bar_regular_phone_view"]/android.widget.LinearLayout[1]').set_text('Proximitysensor calibration')
+# verifying the entered text
+if driver.xpath('//*[@text="Noresults"]').exists:
+   print('NA-->test case result _Setting-330')
+else:
+   print('Pass --> Proximity sensor calibration found')
