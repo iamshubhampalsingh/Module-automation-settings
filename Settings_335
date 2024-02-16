@@ -1,0 +1,26 @@
+import uiautomator2 as ui2
+import time
+
+# Device serial number
+device_serial = "192.168.2.168:5555"
+
+# Create a Device object for the device
+receiver_device = ui2.Device(device_serial)
+
+# Open settings
+receiver_device.app_start("com.android.settings")
+time.sleep(2)
+receiver_device(resourceId="android:id/title", text="Special function").click()
+time.sleep(2)
+receiver_device(scrollable=True).scroll.to(text="Side application bar")
+time.sleep(2)
+receiver_device(resourceId="android:id/title", text="Side application bar").click()
+time.sleep(2)
+# Perform additional actions or handle the toggle state as needed
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
