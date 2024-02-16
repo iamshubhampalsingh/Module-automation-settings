@@ -1,0 +1,105 @@
+'''
+[precondition]
+2 device with sim card to send msg and check recieved msg on another device
+message bubble should be on
+[steps to follow]
+Settings > Notifications > Bubbles> receive msg via another device
+[Expected Result]
+Allow apps to show bubbles with enable/disable option'''
+
+import uiautomator2 as ui2
+from time import sleep
+
+
+reciever_device_serial_num="192.168.2.138:5555"
+
+sender_device_serial_num="S6162ADVT032"
+
+#creating object for reciever_device
+reciever_device=ui2.Device(reciever_device_serial_num)
+
+#creating object for senders_device
+sender_device=ui2.Device(sender_device_serial_num)
+
+#clearing recent open app
+
+reciever_device.xpath("//*[@resource-id='com.android.systemui:id/recent_apps']").click()
+sleep(1)
+if reciever_device.xpath("//*[@resource-id='com.android.launcher3:id/clean_buttons']").exists:
+    reciever_device.xpath("//*[@resource-id='com.android.launcher3:id/clean_buttons']").click()
+    sleep(2)
+else:
+    reciever_device.xpath("//*[@resource-id='com.android.systemui:id/center_group']").click()
+#opening the setting
+reciever_device.xpath("//*[@text='Settings']").click()
+sleep(1)
+
+#clicking on Notification option
+reciever_device(text="Notifications").click()
+sleep(2)
+#clicking on Bubbles
+reciever_device(text="Bubbles").click()
+sleep(1)
+
+#clicking on toggle:
+bubble_toggle=reciever_device(resourceId="android:id/switch_widget")
+#checking state of toggle device
+toggle_state=bubble_toggle.info["checked"]
+sleep(2)
+
+if toggle_state:
+    print("Bubble toggle is on")
+else:
+    bubble_toggle.click()
+    print("bubble_toggle is Now ON")
+sleep(2)
+#now click on Home Button
+reciever_device.xpath("//*[@resource-id='com.android.systemui:id/center_group']").click()
+sleep(2)
+
+#............................sending msg from senders phone..............................................
+
+#clearing recent open app
+sleep(2)
+sender_device.xpath("//*[@resource-id='com.android.systemui:id/recent_apps']").click()
+sleep(1)
+if sender_device.xpath("//*[@resource-id='com.android.launcher3:id/clean_buttons']").exists:
+    sender_device.xpath("//*[@resource-id='com.android.launcher3:id/clean_buttons']").click()
+    sleep(2)
+else:
+    sender_device.xpath("//*[@resource-id='com.android.systemui:id/center_group']").click()
+#clicking on msg button
+sender_device(text="Messages").click()
+sleep(2)
+# checking msg app is open in any msg or not
+if reciever_device(text="Text message").exists:
+    sender_device("com.android.systemui:id/back").click()
+    sleep(2)
+else:
+#clicking on strat chat option
+    sender_device.xpath("//*[@resource-id='com.google.android.apps.messaging:id/start_chat_fab']").click()
+    sleep(2)
+
+#sending mobile no
+sender_device(resourceId="ContactSearchField").set_text("7217716650")
+sleep(2)
+sender_device.xpath("//*[@resource-id='GlideMonogram']").click()
+sleep(1)
+
+#writing txt body and clicking on send button
+
+sender_device(resourceId='com.google.android.apps.messaging:id/compose_message_text').set_text("hi")
+sleep(1)
+sender_device.xpath("//*[@resource-id='com.google.android.apps.messaging:id/send_message_button_container']").click()
+sleep(2)
+for i in range(4):
+    sender_device.xpath("//*[@resource-id='com.android.systemui:id/back']").click()
+
+#verifing wheather bubble chat is working or not
+sleep(10)
+if reciever_device.xpath("//*[@resource-id='com.android.systemui:id/bubble_view']").exists:
+    print("Bubble msg chat is working fine")
+    print("Passed-->testcase Setting-331")
+else:
+    print("Failed---tescase setting331")
+
