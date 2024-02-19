@@ -1,0 +1,26 @@
+import uiautomator2 as ui2
+import time
+
+# Device serial number
+device_serial = "192.168.2.168:5555"
+
+# Create a Device object for the device
+receiver_device = ui2.Device(device_serial)
+
+# Open settings
+receiver_device.app_start("com.android.settings")
+
+# Open settings
+if receiver_device.xpath('//*[@resource-id="com.android.systemui:id/battery"]/android.widget.ImageView[1]').exists:
+    print("The battery percentage is shown and charging happening")
+else:
+    print("The battery percentage is not shown")
+
+# Perform additional actions or handle the toggle state as needed
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
